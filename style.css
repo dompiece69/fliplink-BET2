@@ -1,0 +1,334 @@
+/* FlipLink BET2 - Privacy-first video bio platform */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  background: #0f0f13;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.privacy-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #6ee7b7;
+  border: 1px solid rgba(110, 231, 183, 0.3);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+.privacy-badge::before {
+  content: '🔒';
+  font-size: 0.7rem;
+}
+
+/* ── Preview banner ──────────────────────────────────── */
+.preview-banner {
+  background: linear-gradient(90deg, rgba(167, 139, 250, 0.15), rgba(96, 165, 250, 0.15));
+  border-bottom: 1px solid rgba(167, 139, 250, 0.3);
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.preview-banner p {
+  font-size: 0.82rem;
+  color: #c4b5fd;
+}
+
+.preview-banner strong {
+  color: #a78bfa;
+}
+
+.preview-banner .btn-edit {
+  font-size: 0.78rem;
+  background: rgba(167, 139, 250, 0.2);
+  color: #a78bfa;
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.preview-banner .btn-edit:hover {
+  background: rgba(167, 139, 250, 0.35);
+}
+
+/* ── Profile card ────────────────────────────────────── */
+.profile-wrapper {
+  max-width: 480px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.avatar-ring {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 2.4rem;
+  position: relative;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  background: #34d399;
+  border: 2px solid #0f0f13;
+  border-radius: 50%;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.profile-handle {
+  color: #a78bfa;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.profile-bio {
+  color: #9ca3af;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Stats row ───────────────────────────────────────── */
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Video links ─────────────────────────────────────── */
+.section-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b7280;
+  text-align: left;
+  margin-bottom: 0.75rem;
+}
+
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+
+.link-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(167, 139, 250, 0.4);
+  transform: translateY(-1px);
+}
+
+.link-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.link-info {
+  flex: 1;
+  text-align: left;
+}
+
+.link-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.link-meta {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.link-play {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(167, 139, 250, 0.2);
+  border: none;
+  color: #a78bfa;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.link-play:hover {
+  background: rgba(167, 139, 250, 0.4);
+}
+
+/* ── Link thumb colour variants ──────────────────────── */
+.link-thumb--purple { background: rgba(167, 139, 250, 0.15); }
+.link-thumb--blue   { background: rgba(96,  165, 250, 0.15); }
+.link-thumb--green  { background: rgba(52,  211, 153, 0.15); }
+
+/* ── Footer ──────────────────────────────────────────── */
+.profile-footer {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 0.75rem;
+  color: #4b5563;
+  text-align: center;
+}
+
+.profile-footer a {
+  color: #6b7280;
+  text-decoration: none;
+}
+
+.profile-footer a:hover {
+  color: #a78bfa;
+}
+
+.share-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.share-btn:hover {
+  color: #a78bfa;
+}
+
+/* ── Preview mode overlay label ──────────────────────── */
+.preview-mode-label {
+  display: inline-block;
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(234, 179, 8, 0.35);
+  color: #fbbf24;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  margin-top: 0.5rem;
+}
+
+/* ── Toast notification ───────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(60px);
+  background: #1f2937;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f9fafb;
+  font-size: 0.85rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 10px;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
