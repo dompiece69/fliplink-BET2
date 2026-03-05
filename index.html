@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlipLink – Preview</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔗 FlipLink</h1>
+      <p class="tagline">Paste a URL and see an instant preview</p>
+    </header>
+
+    <section class="input-section">
+      <form id="preview-form">
+        <input
+          type="url"
+          id="url-input"
+          placeholder="https://example.com"
+          required
+          autocomplete="off"
+        />
+        <button type="submit">Preview</button>
+      </form>
+    </section>
+
+    <section id="preview-card" class="preview-card hidden" aria-live="polite">
+      <div class="card-inner">
+        <img id="preview-image" src="" alt="Preview image" class="hidden" />
+        <div class="card-body">
+          <span id="preview-domain" class="domain"></span>
+          <h2 id="preview-title" class="title"></h2>
+          <p id="preview-description" class="description"></p>
+          <a id="preview-link" href="#" target="_blank" rel="noopener noreferrer" class="visit-btn">Visit Site →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="error-msg" class="error hidden"></section>
+    <section id="loading" class="loading hidden">Fetching preview…</section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
