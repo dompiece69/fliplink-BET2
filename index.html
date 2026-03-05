@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soni | FlipLink</title>
+  <meta name="description" content="Soni's FlipLink – privacy-first video bio." />
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="Soni | FlipLink" />
+  <meta property="og:description" content="Check out Soni's video bio on FlipLink." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────── -->
+  <header>
+    <span class="logo">FlipLink</span>
+    <span class="privacy-badge">Privacy&#8209;first</span>
+  </header>
+
+  <!-- ── Preview mode banner ───────────────────── -->
+  <div class="preview-banner">
+    <p>👁 You are viewing <strong>Soni's</strong> profile preview</p>
+    <a id="btn-edit" class="btn-edit" href="#" role="button">✏️ Edit profile</a>
+  </div>
+
+  <!-- ── Profile ───────────────────────────────── -->
+  <main class="profile-wrapper">
+    <article class="profile-card">
+
+      <!-- Avatar -->
+      <div class="avatar-ring">
+        🎵
+        <span class="online-dot" title="Online"></span>
+      </div>
+
+      <h1 class="profile-name">Soni</h1>
+      <p class="profile-handle">@soni</p>
+      <div class="preview-mode-label">Preview mode</div>
+      <p class="profile-bio" style="margin-top:1rem;">
+        Music producer &amp; visual artist 🎹<br />
+        Sharing beats, vlogs &amp; behind-the-scenes drops.
+      </p>
+
+      <!-- Stats -->
+      <div class="stats-row" role="list" aria-label="Profile stats">
+        <div class="stat" role="listitem">
+          <span class="stat-value">12</span>
+          <span class="stat-label">Videos</span>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-value">4.2k</span>
+          <span class="stat-label">Views</span>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-value">318</span>
+          <span class="stat-label">Followers</span>
+        </div>
+      </div>
+
+      <!-- Video links -->
+      <p class="section-title">Video links</p>
+      <ul class="links-list" role="list">
+
+        <li>
+          <button class="link-item" type="button">
+            <div class="link-thumb link-thumb--purple">🎹</div>
+            <div class="link-info">
+              <p class="link-title">Studio Session – Ep.1</p>
+              <p class="link-meta">3 min · 980 views</p>
+            </div>
+            <span class="link-play" aria-label="Play Studio Session – Ep.1">▶</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="link-item" type="button">
+            <div class="link-thumb link-thumb--blue">🎬</div>
+            <div class="link-info">
+              <p class="link-title">Behind the Beat</p>
+              <p class="link-meta">7 min · 2.1k views</p>
+            </div>
+            <span class="link-play" aria-label="Play Behind the Beat">▶</span>
+          </button>
+        </li>
+
+        <li>
+          <button class="link-item" type="button">
+            <div class="link-thumb link-thumb--green">🎤</div>
+            <div class="link-info">
+              <p class="link-title">Freestyle Friday #4</p>
+              <p class="link-meta">5 min · 1.1k views</p>
+            </div>
+            <span class="link-play" aria-label="Play Freestyle Friday #4">▶</span>
+          </button>
+        </li>
+
+      </ul>
+
+      <!-- Footer actions -->
+      <footer class="profile-footer">
+        <button id="btn-share" class="share-btn">
+          🔗 Share profile
+        </button>
+        <br />
+        Powered by <a href="#">FlipLink</a> &middot;
+        <a href="#">Privacy</a>
+      </footer>
+
+    </article>
+  </main>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="preview.js"></script>
+</body>
+</html>
