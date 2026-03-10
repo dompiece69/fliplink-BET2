@@ -1,0 +1,180 @@
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #0f0f13;
+  color: #e8e8f0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* ── Container ── */
+.container {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Header ── */
+header {
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #7c6fff, #ff6fd8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.4rem;
+}
+
+.tagline {
+  color: #8888aa;
+  font-size: 0.95rem;
+}
+
+/* ── Input Section ── */
+.input-section form {
+  display: flex;
+  gap: 0.6rem;
+}
+
+#url-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #2a2a3d;
+  border-radius: 10px;
+  background: #16162a;
+  color: #e8e8f0;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#url-input:focus {
+  border-color: #7c6fff;
+}
+
+#url-input::placeholder {
+  color: #55556a;
+}
+
+button[type="submit"] {
+  padding: 0.75rem 1.4rem;
+  background: linear-gradient(135deg, #7c6fff, #ff6fd8);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover  { opacity: 0.88; }
+button[type="submit"]:active { transform: scale(0.97); }
+
+/* ── Preview Card ── */
+.preview-card {
+  background: #16162a;
+  border: 1px solid #2a2a3d;
+  border-radius: 14px;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+}
+
+.card-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+#preview-image {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.2rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.domain {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7c6fff;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #e8e8f0;
+  line-height: 1.35;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #8888aa;
+  line-height: 1.55;
+}
+
+.visit-btn {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #2a2a3d;
+  color: #c0c0e0;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.visit-btn:hover {
+  background: #7c6fff;
+  color: #fff;
+}
+
+/* ── States ── */
+.loading {
+  text-align: center;
+  color: #8888aa;
+  font-size: 0.95rem;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.error {
+  text-align: center;
+  color: #ff6b6b;
+  background: #2a1616;
+  border: 1px solid #5a2222;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 0.95rem;
+}
+
+.hidden { display: none !important; }
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
