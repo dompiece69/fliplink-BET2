@@ -6,10 +6,14 @@ body {
   background: #0f0f13;
   color: #e8e8f0;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  padding: env(safe-area-inset-top, 1.5rem) env(safe-area-inset-right, 1.5rem) env(safe-area-inset-bottom, 1.5rem) env(safe-area-inset-left, 1.5rem);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ── Container ── */
@@ -18,13 +22,11 @@ body {
   max-width: 640px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.6rem;
 }
 
 /* ── Header ── */
-header {
-  text-align: center;
-}
+header { text-align: center; }
 
 header h1 {
   font-size: 2.4rem;
@@ -41,6 +43,62 @@ header h1 {
   font-size: 0.95rem;
 }
 
+/* ── Install Banner ── */
+.install-banner {
+  background: linear-gradient(135deg, rgba(124,111,255,0.15), rgba(255,111,216,0.10));
+  border: 1px solid rgba(124,111,255,0.3);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.install-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.install-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #c8c0ff;
+}
+
+.install-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.install-btn {
+  padding: 0.45rem 1rem;
+  background: linear-gradient(135deg, #7c6fff, #ff6fd8);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.install-btn:hover { opacity: 0.85; }
+
+.install-dismiss {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.install-dismiss:hover { color: #aaa; }
+
 /* ── Input Section ── */
 .input-section form {
   display: flex;
@@ -56,16 +114,15 @@ header h1 {
   color: #e8e8f0;
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 #url-input:focus {
   border-color: #7c6fff;
+  box-shadow: 0 0 0 3px rgba(124,111,255,0.15);
 }
 
-#url-input::placeholder {
-  color: #55556a;
-}
+#url-input::placeholder { color: #55556a; }
 
 button[type="submit"] {
   padding: 0.75rem 1.4rem;
@@ -89,6 +146,7 @@ button[type="submit"]:active { transform: scale(0.97); }
   border-radius: 14px;
   overflow: hidden;
   animation: fadeIn 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 .card-inner {
@@ -98,7 +156,7 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 #preview-image {
   width: 100%;
-  max-height: 220px;
+  max-height: 240px;
   object-fit: cover;
 }
 
@@ -148,14 +206,113 @@ button[type="submit"]:active { transform: scale(0.97); }
   color: #fff;
 }
 
-/* ── States ── */
-.loading {
-  text-align: center;
-  color: #8888aa;
-  font-size: 0.95rem;
-  animation: pulse 1.2s ease-in-out infinite;
+/* ── History Section ── */
+.history-section {
+  animation: fadeIn 0.3s ease;
 }
 
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.history-header h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #8888aa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.clear-history-btn {
+  background: none;
+  border: 1px solid #2a2a3d;
+  color: #666;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.clear-history-btn:hover {
+  color: #ff6b6b;
+  border-color: #5a2222;
+}
+
+.history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.history-item {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.history-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  background: #16162a;
+  border: 1px solid #1e1e30;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.history-link:hover {
+  background: #1c1c35;
+  border-color: #2a2a3d;
+}
+
+.history-domain {
+  font-size: 0.7rem;
+  color: #7c6fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.history-title {
+  font-size: 0.82rem;
+  color: #aaa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Loading State ── */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: #8888aa;
+  font-size: 0.95rem;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #2a2a3d;
+  border-top-color: #7c6fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Error State ── */
 .error {
   text-align: center;
   color: #ff6b6b;
@@ -166,6 +323,18 @@ button[type="submit"]:active { transform: scale(0.97); }
   font-size: 0.95rem;
 }
 
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
+footer p {
+  font-size: 0.75rem;
+  color: #444460;
+}
+
+/* ── Utilities ── */
 .hidden { display: none !important; }
 
 /* ── Animations ── */
@@ -174,7 +343,33 @@ button[type="submit"]:active { transform: scale(0.97); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.45; }
+  50%      { opacity: 0.45; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  body { padding: 1rem; }
+
+  header h1 { font-size: 1.8rem; }
+  .tagline { font-size: 0.85rem; }
+
+  .input-section form {
+    flex-direction: column;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.85rem;
+  }
+
+  .card-body { padding: 1rem; }
+
+  .install-inner { flex-direction: column; text-align: center; }
+  .install-actions { justify-content: center; }
 }
