@@ -2,8 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FlipLink – Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>FlipLink – Instant Link Previews</title>
+  <meta name="description" content="Paste any URL and instantly see its Open Graph title, description, and image. Free, fast, no sign-up required." />
+  <meta name="theme-color" content="#7c6fff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FlipLink" />
+
+  <!-- Open Graph (for sharing the app itself) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FlipLink – Instant Link Previews" />
+  <meta property="og:description" content="Paste any URL and instantly see its Open Graph title, description, and image." />
+  <meta property="og:image" content="icons/icon-512x512.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="FlipLink – Instant Link Previews" />
+  <meta name="twitter:description" content="Paste any URL and instantly see its Open Graph title, description, and image." />
+  <meta name="twitter:image" content="icons/icon-512x512.png" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128x128.png" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,6 +41,17 @@
       <h1>🔗 FlipLink</h1>
       <p class="tagline">Paste a URL and see an instant preview</p>
     </header>
+
+    <!-- Install Banner (hidden by default, shown via JS when installable) -->
+    <section id="install-banner" class="install-banner hidden" role="alert">
+      <div class="install-inner">
+        <span class="install-text">📲 Install FlipLink for quick access</span>
+        <div class="install-actions">
+          <button id="install-btn" class="install-btn">Install</button>
+          <button id="install-dismiss" class="install-dismiss" aria-label="Dismiss">✕</button>
+        </div>
+      </div>
+    </section>
 
     <section class="input-section">
       <form id="preview-form">
@@ -38,8 +78,24 @@
       </div>
     </section>
 
+    <!-- History Section -->
+    <section id="history-section" class="history-section hidden">
+      <div class="history-header">
+        <h3>Recent Previews</h3>
+        <button id="clear-history" class="clear-history-btn">Clear</button>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
+    </section>
+
     <section id="error-msg" class="error hidden"></section>
-    <section id="loading" class="loading hidden">Fetching preview…</section>
+    <section id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <span>Fetching preview…</span>
+    </section>
+
+    <footer>
+      <p>FlipLink &middot; Free &amp; open-source link previewer</p>
+    </footer>
   </div>
 
   <script src="app.js"></script>
