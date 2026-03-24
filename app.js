@@ -70,17 +70,17 @@ async function fetchPreview(rawUrl) {
   setVisible(errorEl,   false);
 
   try {
-    // allorigins.win returns { contents: "<html>...</html>", status: {...} }
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-    const response = await fetch(proxyUrl);
+    // Use local backend API
+    const apiUrl = `/api/preview?url=${encodeURIComponent(url)}`;
+    const response = await fetch(apiUrl);
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const data = await response.json();
 
-    if (!data.contents) throw new Error('Empty response from proxy');
+    if (!data.success) throw new Error(data.error || 'Failed to fetch preview');
 
-    const meta = parseMeta(data.contents, url);
+    const meta = data.data;
 
     // Populate card
     domainEl.textContent = extractDomain(url);
