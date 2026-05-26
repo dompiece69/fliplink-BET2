@@ -31,6 +31,31 @@ function extractDomain(url) {
   }
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchWithTimeout(url, timeoutMs = 10000) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    return response;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+function getProxyUrl(url, proxyIndex = 0) {
+  const proxies = [
+    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    `https://corsproxy.io/?${encodeURIComponent(url)}`,
+    `https://cors-anywhere.herokuapp.com/${url}`
+  ];
+  return proxies[proxyIndex] || proxies[0];
+}
+
 function parseMeta(html, url) {
   const parser = new DOMParser();
   const doc    = parser.parseFromString(html, 'text/html');
@@ -69,41 +94,64 @@ async function fetchPreview(rawUrl) {
   setVisible(card,      false);
   setVisible(errorEl,   false);
 
-  try {
-    // allorigins.win returns { contents: "<html>...</html>", status: {...} }
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-    const response = await fetch(proxyUrl);
+  const maxRetries = 3;
+  const timeoutMs = 10000;
+  let lastError = null;
 
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    for (let proxyIdx = 0; proxyIdx < 4; proxyIdx++) {
+      try {
+        const proxyUrl = getProxyUrl(url, proxyIdx);
+        const response = await fetchWithTimeout(proxyUrl, timeoutMs);
 
-    const data = await response.json();
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-    if (!data.contents) throw new Error('Empty response from proxy');
+        let data;
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          data = await response.json();
+        } else {
+          data = { contents: await response.text() };
+        }
 
-    const meta = parseMeta(data.contents, url);
+        const html = data.contents || data;
+        if (!html) throw new Error('Empty response from proxy');
 
-    // Populate card
-    domainEl.textContent = extractDomain(url);
-    titleEl.textContent  = meta.title;
-    descEl.textContent   = meta.description;
-    linkEl.href          = url;
+        const meta = parseMeta(html, url);
 
-    if (meta.image) {
-      previewImg.src = meta.image;
-      previewImg.alt = meta.title;
-      setVisible(previewImg, true);
-      previewImg.onerror = () => setVisible(previewImg, false);
-    } else {
-      setVisible(previewImg, false);
+        // Populate card
+        domainEl.textContent = extractDomain(url);
+        titleEl.textContent  = meta.title;
+        descEl.textContent   = meta.description;
+        linkEl.href          = url;
+
+        if (meta.image) {
+          previewImg.src = meta.image;
+          previewImg.alt = meta.title;
+          setVisible(previewImg, true);
+          previewImg.onerror = () => setVisible(previewImg, false);
+        } else {
+          setVisible(previewImg, false);
+        }
+
+        setVisible(loadingEl, false);
+        setVisible(card,      true);
+        return;
+      } catch (err) {
+        lastError = err;
+      }
     }
 
-    setVisible(loadingEl, false);
-    setVisible(card,      true);
-  } catch (err) {
-    setVisible(loadingEl, false);
-    errorEl.textContent = 'Could not load preview. Please check the URL and try again.';
-    setVisible(errorEl, true);
+    // Exponential backoff: wait before next retry attempt
+    if (attempt < maxRetries - 1) {
+      const delay = Math.pow(2, attempt) * 500; // 500ms, 1s, 2s
+      await sleep(delay);
+    }
   }
+
+  setVisible(loadingEl, false);
+  errorEl.textContent = 'Could not load preview. Please check the URL and try again.';
+  setVisible(errorEl, true);
 }
 
 /* ── Event Listeners ── */
