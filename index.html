@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FlipLink – Preview</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -21,17 +21,17 @@
           placeholder="https://example.com"
           required
           autocomplete="off"
-        />
+        >
         <button type="submit">Preview</button>
       </form>
     </section>
 
     <section id="preview-card" class="preview-card hidden" aria-live="polite">
       <div class="card-inner">
-        <img id="preview-image" src="" alt="Preview image" class="hidden" />
+        <img id="preview-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Preview image" class="hidden">
         <div class="card-body">
           <span id="preview-domain" class="domain"></span>
-          <h2 id="preview-title" class="title"></h2>
+          <h2 id="preview-title" class="title">Loading...</h2>
           <p id="preview-description" class="description"></p>
           <a id="preview-link" href="#" target="_blank" rel="noopener noreferrer" class="visit-btn">Visit Site →</a>
         </div>
